@@ -3,23 +3,23 @@
 
 WIR::WIR()
 {
-  
+
 }
 
 WIR::~WIR()
 {
-  
+
 }
 
- void WIR::Verbose(unsigned int Set_Verbose) 
- {	
+ void WIR::Verbose(unsigned int Set_Verbose)
+ {
 	int Prog = 2;
     while(Set_Verbose < 2)
-	{	
+	{
 		pinMode(Prog,OUTPUT);
 		digitalWrite(Prog,HIGH);
 		delay(100);
-		digitalWrite( Prog, LOW);                          		  
+		digitalWrite( Prog, LOW);
 		delay(100);
 		digitalWrite(Prog , HIGH);
 		Set_Verbose = Set_Verbose + 48;
@@ -32,18 +32,18 @@ WIR::~WIR()
 		Serial.write('X');
 		delay(25);
 		Serial.write('\r');
-	} 
+	}
 }
- 
+
 void WIR::Airdata(int Set_Airdata)
 {
 	unsigned int AR1,AR2;
 	int Prog = 2;
-      
+
 	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);                         		  
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 
@@ -54,7 +54,7 @@ void WIR::Airdata(int Set_Airdata)
 	}
 	else
 	{
-		AR1 = AR1 + 55; 
+		AR1 = AR1 + 55;
 	}
 	AR2 = (Set_Airdata & 0x0F);
 	if(AR2<10)
@@ -65,29 +65,29 @@ void WIR::Airdata(int Set_Airdata)
 	{
 		AR2 = AR2 + 55;
 	}
-             
-	Serial.print("AR=");
+
+	Serial.print("A=");
 	delay(10);
 	Serial.write(AR1);
 	delay(10);
 	Serial.write(AR2);
 	delay(10);
 	Serial.write('\r');
-	delay(10);           
+	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r');      
+	Serial.write('\r');
 }
 
 void WIR::Baudrate(int Set_Baudrate)
-{	
+{
 	int Prog = 2;
 	unsigned int BR1, BR2;
-    {  
+    {
 		pinMode(Prog,OUTPUT);
 		digitalWrite(Prog,HIGH);
 		delay(100);
-		digitalWrite(Prog , LOW);                          		   
+		digitalWrite(Prog , LOW);
 		delay(100);
 		digitalWrite(Prog , HIGH);
 
@@ -98,7 +98,7 @@ void WIR::Baudrate(int Set_Baudrate)
         }
         else
         {
-            BR1 = BR1 + 55; 
+            BR1 = BR1 + 55;
         }
 		BR2 = (Set_Baudrate & 0x0F);
 		if(BR2<10)
@@ -109,7 +109,7 @@ void WIR::Baudrate(int Set_Baudrate)
 		{
 			BR2 = BR2 + 55;
 		}
-             
+
 		Serial.print("B=");
 		delay(10);
 		Serial.write(BR1);
@@ -117,25 +117,25 @@ void WIR::Baudrate(int Set_Baudrate)
 		Serial.write(BR2);
 		delay(10);
 		Serial.write('\r');
-		delay(10);           
+		delay(10);
 		Serial.write('X');
 		delay(10);
-		Serial.write('\r');      
+		Serial.write('\r');
 	}
 }
 
 void WIR::Carrierfreq(int Set_Carrierfreq)
-{	
+{
 	int Prog = 2;
 	unsigned int CF1,CF2;
     {
         pinMode(Prog,OUTPUT);
 		digitalWrite(Prog,HIGH);
 		delay(100);
-		digitalWrite(Prog , LOW);             
+		digitalWrite(Prog , LOW);
 		delay(100);
 		digitalWrite(Prog , HIGH);
-      
+
 		CF1 = (Set_Carrierfreq & 0xF0) >> 4;
         if( CF1 < 10 )
         {
@@ -143,7 +143,7 @@ void WIR::Carrierfreq(int Set_Carrierfreq)
         }
         else
         {
-			CF1 = CF1 + 55; 
+			CF1 = CF1 + 55;
         }
 		CF2 = (Set_Carrierfreq & 0x0F);
 		if(CF2<10)
@@ -154,29 +154,29 @@ void WIR::Carrierfreq(int Set_Carrierfreq)
 		{
 			CF2 = CF2 + 55;
 		}
-             
-		Serial.print("CF=");
+
+		Serial.print("C=");
 		delay(10);
 		Serial.write(CF1);
 		delay(10);
 		Serial.write(CF2);
 		delay(10);
 		Serial.write('\r');
-		delay(10);           
+		delay(10);
 		Serial.write('X');
 		delay(10);
-		Serial.write('\r');      
+		Serial.write('\r');
 	}
 }
 
 void WIR::Destination(unsigned int Set_Destination)
-{	
+{
 	int Prog = 2;
 	unsigned int D1,D2,D3,D4;
 	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);                                   		  
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 	D1 = (Set_Destination & 0xF000) >> 12;
@@ -186,7 +186,7 @@ void WIR::Destination(unsigned int Set_Destination)
 	}
 	else
 	{
-		D1 = D1 + 55; 
+		D1 = D1 + 55;
 	}
 	D2 = (Set_Destination & 0x0F00) >> 8;
 	if( D2 < 10 )
@@ -195,7 +195,7 @@ void WIR::Destination(unsigned int Set_Destination)
 	}
 	else
 	{
-		D2 = D2 + 55; 
+		D2 = D2 + 55;
 	}
 	D3 = (Set_Destination & 0x00F0) >> 4;
 	if( D3 < 10 )
@@ -204,7 +204,7 @@ void WIR::Destination(unsigned int Set_Destination)
 	}
 	else
 	{
-		D3 = D3 + 55; 
+		D3 = D3 + 55;
 	}
 	D4 = (Set_Destination & 0x000F);
 	if( D4 < 10 )
@@ -213,11 +213,11 @@ void WIR::Destination(unsigned int Set_Destination)
 	}
 	else
 	{
-		D4 = D4 + 55; 
+		D4 = D4 + 55;
 	}
-	
+
 	Serial.print("D=");
-	delay(100);   
+	delay(100);
 	Serial.write(D1);
 	delay(10);
 	Serial.write(D2);
@@ -225,22 +225,22 @@ void WIR::Destination(unsigned int Set_Destination)
 	Serial.write(D3);
 	delay(10);
 	Serial.write(D4);
-	delay(10); 
+	delay(10);
 	Serial.write('\r');
 	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r');         
+	Serial.write('\r');
 }
 
 void WIR::En_Repeater(int Set_En_Repeater)
-{	  
+{
 	int Prog = 2;
 	unsigned int R1,R2;
 	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);                         		  
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 
@@ -251,7 +251,7 @@ void WIR::En_Repeater(int Set_En_Repeater)
 	}
 	else
 	{
-		R1 = R1 + 55; 
+		R1 = R1 + 55;
 	}
 	R2 = (Set_En_Repeater & 0x0F);
 	if(R2<10)
@@ -262,7 +262,7 @@ void WIR::En_Repeater(int Set_En_Repeater)
 	{
 		R2 = R2 + 55;
 	}
-	 
+
 	Serial.print("M=");
 	delay(10);
 	Serial.write(R1);
@@ -270,20 +270,20 @@ void WIR::En_Repeater(int Set_En_Repeater)
 	Serial.write(R2);
 	delay(10);
 	Serial.write('\r');
-	delay(10);           
+	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r');      
+	Serial.write('\r');
 }
 
 void WIR::Hop(int Set_hop)
-{	
+{
 	int Prog = 2;
     unsigned int H1,H2;
 	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);            
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 
@@ -294,7 +294,7 @@ void WIR::Hop(int Set_hop)
 	}
 	else
 	{
-		H1 = H1 + 55; 
+		H1 = H1 + 55;
 	}
 	H2 = (Set_hop & 0x0F);
 	if(H2<10)
@@ -305,7 +305,7 @@ void WIR::Hop(int Set_hop)
 	{
 		H2 = H2 + 55;
 	}
-		 
+
 	Serial.print("H=");
 	delay(10);
 	Serial.write(H1);
@@ -313,10 +313,10 @@ void WIR::Hop(int Set_hop)
 	Serial.write(H2);
 	delay(10);
 	Serial.write('\r');
-	delay(10);           
+	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r');      
+	Serial.write('\r');
 }
 
 void WIR::Network(unsigned int Set_Network)
@@ -326,7 +326,7 @@ void WIR::Network(unsigned int Set_Network)
 	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);                         		   
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 	N1 = (Set_Network & 0xF000) >> 12;
@@ -336,7 +336,7 @@ void WIR::Network(unsigned int Set_Network)
 	}
 	else
 	{
-		N1 = N1 + 55; 
+		N1 = N1 + 55;
 	}
 	N2 = (Set_Network & 0x0F00) >> 8;
 	if( N2 < 10 )
@@ -345,7 +345,7 @@ void WIR::Network(unsigned int Set_Network)
 	}
 	else
 	{
-		N2 = N2 + 55; 
+		N2 = N2 + 55;
 	}
 	N3 = (Set_Network & 0x00F0) >> 4;
 	if( N3 < 10 )
@@ -354,7 +354,7 @@ void WIR::Network(unsigned int Set_Network)
 	}
 	else
 	{
-		N3 = N3 + 55; 
+		N3 = N3 + 55;
 	}
 	N4 = (Set_Network & 0x000F);
 	if( N4 < 10 )
@@ -363,9 +363,9 @@ void WIR::Network(unsigned int Set_Network)
 	}
 	else
 	{
-		N4 = N4 + 55; 
+		N4 = N4 + 55;
 	}
-	
+
 	Serial.print("N=");
 	delay(100);
 	Serial.write(N1);
@@ -380,17 +380,17 @@ void WIR::Network(unsigned int Set_Network)
 	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r'); 
+	Serial.write('\r');
 }
 
 void WIR::Power(int Set_Power)
 {
 	unsigned int P1,P2;
-    int Prog = 2;  
+    int Prog = 2;
 	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);                          		  
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 
@@ -401,7 +401,7 @@ void WIR::Power(int Set_Power)
 	}
 	else
 	{
-		P1 = P2 + 55; 
+		P1 = P2 + 55;
 	}
 	P2 = (Set_Power & 0x0F);
 	if(P2<10)
@@ -412,7 +412,7 @@ void WIR::Power(int Set_Power)
 	{
 		P2 = P2 + 55;
 	}
-	 
+
 	Serial.print("P=");
 	delay(10);
 	Serial.write(P1);
@@ -420,10 +420,10 @@ void WIR::Power(int Set_Power)
 	Serial.write(P2);
 	delay(10);
 	Serial.write('\r');
-	delay(10);           
+	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r');      
+	Serial.write('\r');
 }
 
 void WIR::RSSI(int Set_RSSI)
@@ -433,7 +433,7 @@ void WIR::RSSI(int Set_RSSI)
 	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);             
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 
@@ -444,7 +444,7 @@ void WIR::RSSI(int Set_RSSI)
 	}
 	else
 	{
-		RS1 = RS1 + 55; 
+		RS1 = RS1 + 55;
 	}
 	RS2 = (Set_RSSI & 0x0F);
 	if(RS2<10)
@@ -455,7 +455,7 @@ void WIR::RSSI(int Set_RSSI)
 	{
 		RS2 = RS2 + 55;
 	}
-		 
+
 	Serial.print("R=");
 	delay(10);
 	Serial.write(RS1);
@@ -463,10 +463,10 @@ void WIR::RSSI(int Set_RSSI)
 	Serial.write(RS2);
 	delay(10);
 	Serial.write('\r');
-	delay(10);           
+	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r');      
+	Serial.write('\r');
 }
 
 void WIR::Source(unsigned int Set_Source)
@@ -476,7 +476,7 @@ void WIR::Source(unsigned int Set_Source)
  	pinMode(Prog,OUTPUT);
 	digitalWrite(Prog,HIGH);
 	delay(100);
-	digitalWrite(Prog , LOW);                          		  
+	digitalWrite(Prog , LOW);
 	delay(100);
 	digitalWrite(Prog , HIGH);
 
@@ -487,7 +487,7 @@ void WIR::Source(unsigned int Set_Source)
 	}
 	else
 	{
-		S1 = S1 + 55; 
+		S1 = S1 + 55;
 	}
 	S2 = (Set_Source & 0x0F00) >> 8;
 	if( S2 < 10 )
@@ -496,7 +496,7 @@ void WIR::Source(unsigned int Set_Source)
 	}
 	else
 	{
-		S2 = S2 + 55; 
+		S2 = S2 + 55;
 	}
 	S3 = (Set_Source & 0x00F0) >> 4;
 	if( S3 < 10 )
@@ -505,7 +505,7 @@ void WIR::Source(unsigned int Set_Source)
 	}
 	else
 	{
-		S3 = S3 + 55; 
+		S3 = S3 + 55;
 	}
 	S4 = (Set_Source & 0x000F);
 	if( S4 < 10 )
@@ -514,11 +514,11 @@ void WIR::Source(unsigned int Set_Source)
 	}
 	else
 	{
-		S4 = S4 + 55; 
+		S4 = S4 + 55;
 	}
-	
+
 	Serial.print("S=");
-	delay(100); 
+	delay(100);
 
 	Serial.write(S1);
 	delay(10);
@@ -527,52 +527,46 @@ void WIR::Source(unsigned int Set_Source)
 	Serial.write(S3);
 	delay(10);
 	Serial.write(S4);
-	delay(10); 
+	delay(10);
 	Serial.write('\r');
 	delay(10);
 	Serial.write('X');
 	delay(10);
-	Serial.write('\r');   
+	Serial.write('\r');
 }
 
-void WIR::WIR_send(  char data)
+void WIR::WIR_send(char data)
 {
-	int CTS = 3; 
-	// char data;
-	// char *StringPtr;
-	{      
-		while(digitalRead(CTS) == HIGH);     
-		{
-			Serial.write(data);
-			delay(10);
-		} 
+	int CTS = 3;
+	while(digitalRead(CTS) == HIGH);
+	{
+		Serial.write(data);
+		delay(10);
 	}
 }
 
 void WIR:: WIR_string(char *StringPtr)
-{ 
-	int CTS = 3; 	   
-	while(digitalRead(CTS) == HIGH);    
+{
+	int CTS = 3;
+	while(digitalRead(CTS) == HIGH);
 	{
-		// char *StringPtr;
-	
 		while(*StringPtr!= 0x00)
 		{
 			WIR_send(*StringPtr);
 			*StringPtr++;
 		}
-	} 
+	}
 }
 
 void WIR:: Encryption(unsigned int set_Encryption)
 {
 	int Prog = 2;
     while(set_Encryption < 2)
-	{	
+	{
 		pinMode(Prog,OUTPUT);
 		digitalWrite(Prog,HIGH);
 		delay(100);
-		digitalWrite( Prog, LOW);                          		  
+		digitalWrite( Prog, LOW);
 		delay(100);
 		digitalWrite(Prog , HIGH);
 		set_Encryption = set_Encryption + 48;
@@ -585,13 +579,5 @@ void WIR:: Encryption(unsigned int set_Encryption)
 		Serial.write('X');
 		delay(25);
 		Serial.write('\r');
-    } 
+    }
 }
- 
-
-
-
-
-
-
-
